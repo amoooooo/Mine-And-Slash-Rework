@@ -124,12 +124,12 @@ public class PerkButton extends ImageButton {
 
     int xPos(int offset, float multi) {
         float scale = 2 - screen.zoom;
-        return (int) ((this.getX() - ((width/6) * scale)) * multi) + offset;
+        return (int) ((this.getX() - ((width/6) * scale/2f)) * multi) + offset;
     }
 
     int yPos(int offset, float multi) {
         float scale = 2 - screen.zoom;
-        return (int) ((this.getY() - ((height/6) * scale)) * multi) + offset;
+        return (int) ((this.getY() - ((height/6) * scale/2f)) * multi) + offset;
     }
 
     @Override
@@ -151,11 +151,11 @@ public class PerkButton extends ImageButton {
         PerkStatus status = playerData.talents.getStatus(Minecraft.getInstance().player, school, point);
 
 
-        int offset = 4;
+        int offset = 0;
 
         // background
         RenderSystem.enableDepthTest();
-        gui.blit(ID, xPos(0, posMulti), yPos(0, posMulti), perk.getType()
+        gui.blit(ID, xPos(-4, posMulti), yPos(-4, posMulti), perk.getType()
                 .getXOffset(), status
                 .getYOffset(), this.width, this.height);
 
@@ -164,10 +164,10 @@ public class PerkButton extends ImageButton {
             gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
         } else if (this.perk.getType() == Perk.PerkType.MAJOR) {
             // icon
-            offset = 9;
+            offset = 5;
             RenderUtils.render16Icon(gui, perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti));
         } else if (perk.getType() == Perk.PerkType.START) {
-            offset = 3;
+            offset = -1;
             if (perk.icon == null || perk.icon.isEmpty()) {
                 RenderUtils.render16Icon(gui, new ResourceLocation(school.icon), xPos(offset, posMulti), yPos(offset, posMulti));
             } else {
@@ -176,7 +176,7 @@ public class PerkButton extends ImageButton {
         } else if (perk.getType() == Perk.PerkType.SPECIAL) {
 
             // icon
-            offset = 6;
+            offset = 2;
             gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
         }
 
